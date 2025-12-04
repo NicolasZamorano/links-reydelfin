@@ -1,0 +1,214 @@
+:root {
+  --bg-dark: #0a1408;
+  --bg-dark-secondary: #0d1f12;
+  --green-neon: #00E676;
+  --green-bright: #00FF7F;
+  --green-dark: #00B359;
+  --text-color: #ffffff;
+  --card-bg: rgba(15, 31, 18, 0.85);
+  --card-hover-bg: rgba(20, 40, 25, 0.95);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, 
+    var(--bg-dark) 0%, 
+    var(--bg-dark-secondary) 30%, 
+    #0a1a0f 60%, 
+    var(--bg-dark) 100%);
+  color: var(--text-color);
+  font-family: 'Inter', system-ui, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Partículas cayendo como lluvia */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 15%, rgba(0, 230, 118, 0.15) 0%, transparent 3%),
+    radial-gradient(circle at 50% 35%, rgba(0, 255, 127, 0.12) 0%, transparent 2%),
+    radial-gradient(circle at 80% 10%, rgba(0, 179, 89, 0.1) 0%, transparent 3%),
+    radial-gradient(circle at 35% 55%, rgba(0, 230, 118, 0.08) 0%, transparent 2%),
+    radial-gradient(circle at 65% 25%, rgba(0, 255, 127, 0.1) 0%, transparent 3%),
+    radial-gradient(circle at 15% 75%, rgba(0, 179, 89, 0.12) 0%, transparent 2%),
+    radial-gradient(circle at 90% 65%, rgba(0, 230, 118, 0.09) 0%, transparent 3%),
+    radial-gradient(circle at 40% 5%, rgba(0, 255, 127, 0.11) 0%, transparent 2%),
+    radial-gradient(circle at 25% 85%, rgba(0, 230, 118, 0.1) 0%, transparent 2%),
+    radial-gradient(circle at 75% 45%, rgba(0, 179, 89, 0.13) 0%, transparent 3%),
+    radial-gradient(circle at 45% 95%, rgba(0, 255, 127, 0.09) 0%, transparent 2%),
+    radial-gradient(circle at 85% 50%, rgba(0, 230, 118, 0.11) 0%, transparent 3%);
+  background-size: 100% 100%;
+  background-repeat: repeat-y;
+  animation: rain 15s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Líneas verticales cayendo */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 80px,
+      rgba(0, 230, 118, 0.04) 80px,
+      rgba(0, 230, 118, 0.04) 81px
+    );
+  background-size: 100% 80px;
+  background-repeat: repeat;
+  animation: rainLines 6s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+@keyframes rain {
+  from { background-position: 0 0; }
+  to { background-position: 0 100vh; }
+}
+
+@keyframes rainLines {
+  from { background-position: 0 0; }
+  to { background-position: 0 80px; }
+  100% { background-position: 0 -100px; }
+}
+
+.container {
+  width: 100%;
+  max-width: 480px; /* Ancho típico de móvil/linktree */
+  padding: 2rem 1rem;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Perfil --- */
+.profile-section {
+  position: relative;
+  z-index: 2;
+}
+
+.glow-effect {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(0, 230, 118, 0.3) 0%, transparent 70%);
+  filter: blur(40px);
+  z-index: 1;
+  pointer-events: none;
+  animation: glow 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+  50% { opacity: 0.8; transform: translateX(-50%) scale(1.1); }
+}
+
+.profile-frame {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.profile-pic {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--green-neon);
+  box-shadow: 0 0 20px rgba(0, 230, 118, 0.4), 0 4px 15px rgba(0,0,0,0.5);
+  position: relative;
+  z-index: 2;
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+p {
+  color: #aaa;
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+/* --- Botones / Links --- */
+.links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.link-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--card-bg);
+  color: white;
+  text-decoration: none;
+  padding: 1rem 1.5rem;
+  border-radius: 50px; /* Bordes muy redondeados estilo Linktree */
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 230, 118, 0.2);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.link-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 230, 118, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.link-card:hover::before {
+  left: 100%;
+}
+
+.link-card:hover {
+  transform: translateY(-3px); /* Efecto de levitación */
+  background-color: var(--card-hover-bg);
+  /* Usamos la variable que definimos en React para el color del borde al hacer hover */
+  border-color: var(--hover-color); 
+  box-shadow: 0 0 20px var(--hover-color), 0 0 40px rgba(0, 230, 118, 0.2); /* Glow neon */
+}
+
+.icon {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.label {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+footer {
+  margin-top: 3rem;
+  font-size: 0.8rem;
+  color: rgba(0, 230, 118, 0.5);
+}
